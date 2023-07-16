@@ -1,54 +1,27 @@
-import Image from "next/image";
+"use client";
+
+import { ChatInput } from "@/components/ChatInput/ChatInput";
 import styles from "./page.module.css";
+import useLocalStorage from "@/hooks/useLocalStorage";
+import { CHAT_SPEAKER_US, ChatItem, ChatItems } from "../types/ChatItems";
+import { ChatOutput } from "@/components/ChatOutput/ChatOutput";
 
 export default function Home() {
+  const [chatItems, setChatItems] = useLocalStorage<ChatItems>("chatItems", []);
+
+  const addChatItem = (chatItemContent: string) => {
+    const chatItem: ChatItem = { id: new Date().toISOString(), content: chatItemContent, speaker: CHAT_SPEAKER_US };
+    setChatItems(chatItems.concat([chatItem]));
+  };
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app" target="_blank" rel="noopener noreferrer">
-            By <Image src="/vercel.svg" alt="Vercel Logo" className={styles.vercelLogo} width={100} height={24} priority />
-          </a>
-        </div>
+    <div className={styles.main}>
+      <div className={styles.logPane}>
+        <ChatOutput chatItems={chatItems} />
       </div>
-
-      <div className={styles.center}>
-        <Image className={styles.logo} src="/next.svg" alt="Next.js Logo" width={180} height={37} priority />
+      <div className={styles.chatInputPane}>
+        <ChatInput initialValue="" onSend={(text) => addChatItem(text)} />
       </div>
-
-      <div className={styles.grid}>
-        <a href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app" className={styles.card} target="_blank" rel="noopener noreferrer">
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app" className={styles.card} target="_blank" rel="noopener noreferrer">
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app" className={styles.card} target="_blank" rel="noopener noreferrer">
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app" className={styles.card} target="_blank" rel="noopener noreferrer">
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>Instantly deploy your Next.js site to a shareable URL with Vercel.</p>
-        </a>
-      </div>
-    </main>
+    </div>
   );
 }

@@ -1,0 +1,19 @@
+.bubbles {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.bubble {
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 12px;
+
+  &.us {
+    align-self: flex-end;
+  }
+}
+
+.bubble + .bubble {
+  margin-top: 16px;
+}
