@@ -1,3 +1,22 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": [
+    "next/core-web-vitals",
+    "eslint:recommended",
+    "prettier"
+  ],
+  "env": {
+    "es6": true,
+    "node": true
+  },
+  "rules": {
+    "prettier/prettier": "error",
+    "no-console": "off",
+    "sort-imports": "off"
+  },
+  "plugins": [
+    "prettier"
+  ],
+  "globals": {
+    "React": true
+  }
 }
