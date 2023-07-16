@@ -1,13 +1,14 @@
 "use client";
 
-export const CHAT_SPEAKER_THEM = "them";
-export const CHAT_SPEAKER_US = "us";
+export const CHAT_ROLE_SYSTEM = "system";
+export const CHAT_ROLE_ASSISTANT = "assistant";
+export const CHAT_ROLE_USER = "user";
 
-export type ChatSpeaker = typeof CHAT_SPEAKER_THEM | typeof CHAT_SPEAKER_US;
+export type ChatSpeaker = typeof CHAT_ROLE_SYSTEM | typeof CHAT_ROLE_ASSISTANT | typeof CHAT_ROLE_USER;
 
 export type ChatItem = {
   id: string;
-  speaker: ChatSpeaker;
+  role: ChatSpeaker;
   content: string;
 };
 

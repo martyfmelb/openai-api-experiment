@@ -5,12 +5,19 @@
 }
 
 .bubble {
-  border: 1px solid black;
+  background: #E6EAEB;
   border-radius: 10px;
   padding: 12px;
 
-  &.us {
+  &.user {
+    background: #0080FF;
+    color: #FFFFFF;
     align-self: flex-end;
+  }
+
+  &.system {
+    background: #D42626;
+    color: #FFFFFF;
   }
 }
 

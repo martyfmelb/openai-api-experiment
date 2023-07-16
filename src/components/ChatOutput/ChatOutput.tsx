@@ -1,15 +1,11 @@
 import styles from "./ChatOutput.module.scss";
-import { CHAT_SPEAKER_THEM, CHAT_SPEAKER_US, ChatItem, ChatItems } from "@/types/ChatItems";
+import { CHAT_ROLE_ASSISTANT, CHAT_ROLE_SYSTEM, CHAT_ROLE_USER, ChatItem, ChatItems } from "@/types/ChatItems";
+import Typography from "@mui/material/Typography";
 import clsx from "clsx";
 
 const multilinify = (text: string) => {
   const lines = text.split("\n");
-  return lines.map((line, index) => (
-    <>
-      {index > 0 && <br />}
-      {line}
-    </>
-  ));
+  return lines.map((line, index) => <Typography variant="body2">{line}</Typography>);
 };
 
 type ChatOutputProps = {
@@ -22,8 +18,9 @@ export const ChatOutput: React.FC<ChatOutputProps> = (props) => (
       <p
         key={chatItem.id}
         className={clsx(styles.bubble, {
-          [styles.them]: chatItem.speaker === CHAT_SPEAKER_THEM,
-          [styles.us]: chatItem.speaker === CHAT_SPEAKER_US,
+          [styles.system]: chatItem.role === CHAT_ROLE_SYSTEM,
+          [styles.assistant]: chatItem.role === CHAT_ROLE_ASSISTANT,
+          [styles.user]: chatItem.role === CHAT_ROLE_USER,
         })}
       >
         {multilinify(chatItem.content)}
