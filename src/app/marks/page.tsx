@@ -5,13 +5,11 @@ import { Avatar, Button } from "@mui/material";
 import styles from "./page.module.scss";
 import axios from "axios";
 
-import { questions, sourceMaterial, studentAnswers, correctAnswers } from "@/mock-data/english-test";
 import { englishTestPrompt } from "@/mock-data/english-test-prompt";
 import TextField from "@mui/material/TextField";
 import { useRef, useState } from "react";
 import useLocalStorage from "@/hooks/useLocalStorage";
 
-import mockResponse from "../../mock-data/english-test-mock-azure-openai-response.json";
 import { OpenAiChatCompletionsResponse } from "@/types/OpenAiChatCompletionsResponse";
 import { chatItemsToOpenAiMessages } from "@/mappers/chatItemsToOpenAiMessages";
 
@@ -35,6 +33,7 @@ export default function Marks() {
   const [correctAnswers, setCorrectAnswers] = useLocalStorage("correctAnswers", "");
 
   const postTestResultsAndGetMarked = () => {
+    setIsShowingLoader(true);
     return axios
       .post<{ data: OpenAiChatCompletionsResponse }>("/api/chat", {
         messages: chatItemsToOpenAiMessages([
@@ -46,16 +45,24 @@ export default function Marks() {
         ]),
       })
       .then((res) => {
+        setIsShowingLoader(false);
+        setIsShowingTestPage(false);
+        setIsShowingResultsPage(true);
         setTestQuestionsWithAnswers(JSON.parse(res.data.data.choices[0].message.content).testQuestionsWithAnswers);
       });
   };
 
   const [testQuestionsWithAnswers, setTestQuestionsWithAnswers] = useState([]);
 
+  const [isShowingTestPage, setIsShowingTestPage] = useState<boolean>(true);
+  const [isShowingResultsPage, setIsShowingResultsPage] = useState<boolean>(false);
+  const [isShowingLoader, setIsShowingLoader] = useState<boolean>(false);
+
   return (
     <div className={styles.pager}>
-      <div className={styles.testPage}>
-        <div>
+      <div className={styles.testPage} style={{ display: isShowingTestPage ? "" : "none" }}>
+        <Typography variant="h3">{testData.testName}</Typography>
+        <div className={styles.field}>
           <Typography variant="h5">Source Material:</Typography>
           <TextField
             inputRef={sourceMaterialRef}
@@ -65,7 +72,7 @@ export default function Marks() {
             multiline
           />
         </div>
-        <div>
+        <div className={styles.field}>
           <Typography variant="h5">Questions:</Typography>
           <TextField
             inputRef={questionsRef}
@@ -75,7 +82,7 @@ export default function Marks() {
             multiline
           />
         </div>
-        <div>
+        <div className={styles.field}>
           <Typography variant="h5">Correct answers:</Typography>
           <TextField
             inputRef={correctAnswersRef}
@@ -85,7 +92,7 @@ export default function Marks() {
             multiline
           />
         </div>
-        <div>
+        <div className={styles.field}>
           <Typography variant="h5">Student answers:</Typography>
           <TextField
             inputRef={studentAnswersRef}
@@ -95,18 +102,22 @@ export default function Marks() {
             multiline
           />
         </div>
-        <Button onClick={() => postTestResultsAndGetMarked()}>Submit test</Button>
+        <br />
+        <Button variant="contained" onClick={() => postTestResultsAndGetMarked()}>
+          Submit test
+        </Button>
       </div>
-      <div className={styles.resultsPage}>
+      <div style={{ display: isShowingLoader ? "" : "none" }}>
+        <img src="/loading-icon.gif" />
+      </div>
+      <div className={styles.resultsPage} style={{ display: isShowingResultsPage ? "" : "none" }}>
         <div className={styles.studentBlock}>
           <Avatar src={"/jessica-smith.jpg"} sx={{ width: 128, height: 128 }}></Avatar>
           <Typography variant="h4">Name: {testData.studentName}</Typography>
           <Typography variant="h5">Class: {testData.class}</Typography>
           <Typography variant="h5">Subject: {testData.subject}</Typography>
-          <Typography variant="h3">
-            Mark: {testData.studentMarks} / {testData.totalMarks}
-          </Typography>
         </div>
+        <Typography variant="h3">{testData.testName}</Typography>
         <div className={styles.questionsAndAnswers}>
           {testQuestionsWithAnswers.map((item, index) => (
             <div key={index} className={styles.questionAndAnswer}>

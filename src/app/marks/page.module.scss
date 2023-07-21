@@ -1,9 +1,15 @@
 .testPage {
   background: #DDF;
+  padding: 30px;
+}
+
+.field + .field {
+  margin-top: 20px;
 }
 
 .resultsPage {
   background: #CFC;
+  padding: 30px;
 }
 
 .studentBlock {
@@ -13,6 +19,7 @@
   border: 1px solid #888;
   background: #FFFFFF;
   position: relative;
+  margin-bottom: 20px;
 }
 
 .questionsAndAnswers {
@@ -27,6 +34,7 @@
   position: relative;
   border: 1px solid #888;
   padding: 20px;
+  padding-right: 100px;
 }
 
 .isCorrect {
@@ -36,16 +44,27 @@
   font-size: 40px;
 }
 
+.question {
+  font-weight: bold;
+  font-size: 22px;
+}
+
+.question + .correctAnswer,
+.question + .studentAnswer {
+  margin-top: 20px;
+}
+
 .questionAndAnswer + .questionAndAnswer {
   margin-top: 20px;
 }
 
 .studentAnswer {
   font-family: "Comic Sans MS";
+  font-size: 22px;
 }
 
 .correctAnswer {
-
+  font-size: 22px;
 }
 
 .notes {
