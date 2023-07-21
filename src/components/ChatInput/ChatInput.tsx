@@ -23,7 +23,7 @@ export const ChatInput: React.FC<ChatInputProps> = (props) => {
   );
 
   const handleSendClick = useCallback(
-    (e: React.MouseEvent<HTMLTextAreaElement>) => {
+    (e: React.MouseEvent<HTMLTextAreaElement | HTMLButtonElement>) => {
       handleSend(textFieldRef.current?.value || "");
       e.preventDefault();
     },
