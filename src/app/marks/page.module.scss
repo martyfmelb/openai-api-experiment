@@ -1,0 +1,49 @@
+.testPage {
+  background: #DDF;
+}
+
+.resultsPage {
+  background: #CFC;
+}
+
+.studentBlock {
+  float: right;
+  white-space: nowrap;
+  padding: 20px;
+  border: 1px solid #888;
+  background: #FFFFFF;
+  position: relative;
+}
+
+.questionsAndAnswers {
+  &:before {
+    content:"";
+    display: table;
+    clear: both;
+  }
+}
+
+.questionAndAnswer {
+  position: relative;
+  border: 1px solid #888;
+  padding: 20px;
+}
+
+.isCorrect {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 40px;
+}
+
+.questionAndAnswer + .questionAndAnswer {
+  margin-top: 20px;
+}
+
+.studentAnswer {
+  font-family: "Comic Sans MS";
+}
+
+.correctAnswer {
+
+}

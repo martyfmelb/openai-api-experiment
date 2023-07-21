@@ -1,0 +1,157 @@
+{
+  "subject": "English",
+  "class": "3L",
+  "testName": "English Comprehension",
+  "studentName": "Jessica Smith",
+  "studentMarks": 26,
+  "totalMarks": 30,
+  "testQuestionsWithAnswers": [
+    {
+      "question": "1. What is the story about?",
+      "correctAnswer": "A visit to the crocodile farm",
+      "studentAnswer": "A visit to the crocodile farm",
+      "isCorrect": "✅",
+      "notes": ""
+    },
+    {
+      "question": "2. How did the children get to the crocodile farm?",
+      "correctAnswer": "bus",
+      "studentAnswer": "bus",
+      "isCorrect": "✅",
+      "notes": ""
+    },
+    {
+      "question": "3. Complete the sentence: \"Every night, before Ravi goes to bed, his mother ___\"",
+      "correctAnswer": "reads him one of his favourite stories.",
+      "studentAnswer": "reads his one of his favourite stories.",
+      "isCorrect": "❌",
+      "notes": "\"his\" should be \"him\""
+    },
+    {
+      "question": "4. List two crocodile facts in the story.",
+      "correctAnswer": "Any two: Crocodiles are reptiles. Some live in the sea, while others live in rivers.",
+      "studentAnswer": "Any two: Crocodiles are reptiles. Some live in the sea, while others live in rivers.",
+      "isCorrect": "✅",
+      "notes": ""
+    },
+    {
+      "question": "5. Are the statements true or false? <br> 5.1 Crocodiles are reptiles. <br> 5.2 Sam was a very naughty boy.",
+      "correctAnswer": "5.1 true <br> 5.2 false",
+      "studentAnswer": "5.1 true <br> 5.2 false",
+      "isCorrect": "✅",
+      "notes": ""
+    },
+    {
+      "question": "6. Match the characters with the correct information. <br> Characters: mother, Ravi. <br> Information: loved animals, read a story.",
+      "correctAnswer": "mother read a story, Ravi loved animals",
+      "studentAnswer": "mother read a story, Ravu loved animals",
+      "isCorrect": "❌",
+      "notes": "\"Ravu\" should be \"Ravi\""
+    },
+    {
+      "question": "7. Why did Josh fall off the wall?",
+      "correctAnswer": "Josh climbed on the wall to look at the crocodiles",
+      "studentAnswer": "Josh climbed on the wall to look at the crocodiles",
+      "isCorrect": "✅",
+      "notes": ""
+    },
+    {
+      "question": "8. List two words that rhyme with \"crocodiles\". One must be in the story.",
+      "correctAnswer": "reptiles, smiles",
+      "studentAnswer": "reptiles, smiles",
+      "isCorrect": "✅",
+      "notes": ""
+    },
+    {
+      "question": "9. What do you think \"tasty\" means?",
+      "correctAnswer": "It tastes good. It has a nice flavour.",
+      "studentAnswer": "It tastes good. It has a nice flavour.",
+      "isCorrect": "✅",
+      "notes": ""
+    },
+    {
+      "question": "10. Find a word in the story that has the same meaning as \"small\".",
+      "correctAnswer": "little",
+      "studentAnswer": "little",
+      "isCorrect": "✅",
+      "notes": ""
+    },
+    {
+      "question": "11. Fill in the missing sounds: A crocodile does not bru________ his tee________.",
+      "correctAnswer": "sh, th",
+      "studentAnswer": "sh, th",
+      "isCorrect": "✅",
+      "notes": ""
+    },
+    {
+      "question": "12. Make a sentence using the word \"book\".",
+      "correctAnswer": "Your child writes his/her own sentence using the word \"book\"",
+      "studentAnswer": "Your child writes his/her own sentence using the word \"book\"",
+      "isCorrect": "N/A",
+      "notes": ""
+    },
+    {
+      "question": "13. Rewrite the sentence using the correct punctuation. <br> \"sam and ravi went to the crocodile farm on tuesday, said Mom\"",
+      "correctAnswer": "\"Sam and Ravi went to the crocodile farm on Tuesday,\" said Mom.",
+      "studentAnswer": "\"Sam and Ravi went to the crocodile farm on Tuesday,\" said Mom.",
+      "isCorrect": "✅",
+      "notes": ""
+    },
+    {
+      "question": "14. Did Ravi fall into the crocodile den?",
+      "correctAnswer": "no",
+      "studentAnswer": "no",
+      "isCorrect": "✅",
+      "notes": ""
+    },
+    {
+      "question": "15. Write sentences using these words. <br> 15.1 road <br> 15.2 rode",
+      "correctAnswer": "A road is a way leading from one place to another. <br> He rode his bike to the park.",
+      "studentAnswer": "A road is a way leading from one place to another. <br> The word \"rode\" is the past tense of the word \"ride\".",
+      "isCorrect": "❌",
+      "notes": "Two sentences were required for each word"
+    },
+    {
+      "question": "16. Have you ever seen a crocodile smile?",
+      "correctAnswer": "Your child writes his/her own answer",
+      "studentAnswer": "Your child writes his/her own answer",
+      "isCorrect": "N/A",
+      "notes": ""
+    },
+    {
+      "question": "17. Underline the verb in each sentence. <br> 17.1 A crocodile can move quickly in the water. <br> 17.2 Would you swim with a crocodile?",
+      "correctAnswer": "17.1 move <br> 17.2 swim",
+      "studentAnswer": "17.1 move <br> 17.2 swim",
+      "isCorrect": "✅",
+      "notes": ""
+    },
+    {
+      "question": "18. Rewrite the sentence in cursive.",
+      "correctAnswer": "(visual check)",
+      "studentAnswer": "(visual check)",
+      "isCorrect": "N/A",
+      "notes": ""
+    },
+    {
+      "question": "19. Match the cursive letters with the print letters.",
+      "correctAnswer": "(visual check)",
+      "studentAnswer": "(visual check)",
+      "isCorrect": "N/A",
+      "notes": ""
+    },
+    {
+      "question": "20. Rewrite the sentence using the correct spacing.",
+      "correctAnswer": "The lady at the crocodile farm teaches them about animals.",
+      "studentAnswer": "The lady at the crocodile farm teaches them about animals.",
+      "isCorrect": "✅",
+      "notes": ""
+    },
+    {
+      "question": "21. Write the capital letters in cursive. <br> A <br> B <br> G <br> H",
+      "correctAnswer": "(visual check)",
+      "studentAnswer": "(visual check)",
+      "isCorrect": "N/A",
+      "notes": ""
+    }
+  ]
+}
