@@ -35,7 +35,7 @@ export default function Home() {
     <div className={styles.main}>
       <Button
         variant="outlined"
-        onClick={(e) => {
+        onClick={() => {
           setChatItems([]);
         }}
       >

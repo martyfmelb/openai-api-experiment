@@ -5,7 +5,11 @@ import clsx from "clsx";
 
 const multilinify = (text: string) => {
   const lines = text.split("\n");
-  return lines.map((line, index) => <Typography variant="body2">{line}</Typography>);
+  return lines.map((line, index) => (
+    <Typography key={index} variant="body2">
+      {line}
+    </Typography>
+  ));
 };
 
 type ChatOutputProps = {
