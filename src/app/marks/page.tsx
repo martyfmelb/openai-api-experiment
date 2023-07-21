@@ -12,6 +12,8 @@ import { useRef, useState } from "react";
 import useLocalStorage from "@/hooks/useLocalStorage";
 
 import mockResponse from "../../mock-data/english-test-mock-azure-openai-response.json";
+import { OpenAiChatCompletionsResponse } from "@/types/OpenAiChatCompletionsResponse";
+import { chatItemsToOpenAiMessages } from "@/mappers/chatItemsToOpenAiMessages";
 
 export default function Marks() {
   const multilinify = (s: string) =>
@@ -22,57 +24,78 @@ export default function Marks() {
       </>
     ));
 
-  const filledPrompt = englishTestPrompt({ questions, sourceMaterial, studentAnswers, correctAnswers });
+  const questionsRef = useRef<HTMLTextAreaElement>(null);
+  const sourceMaterialRef = useRef<HTMLTextAreaElement>(null);
+  const studentAnswersRef = useRef<HTMLTextAreaElement>(null);
+  const correctAnswersRef = useRef<HTMLTextAreaElement>(null);
+
+  const [questions, setQuestions] = useLocalStorage("questions", "");
+  const [sourceMaterial, setSourceMaterial] = useLocalStorage("sourceMaterial", "");
+  const [studentAnswers, setStudentAnswers] = useLocalStorage("studentAnswers", "");
+  const [correctAnswers, setCorrectAnswers] = useLocalStorage("correctAnswers", "");
 
   const postTestResultsAndGetMarked = () => {
-    // return axios
-    //   .post<{ data: OpenAiChatCompletionsResponse }>("/api/chat", {
-    //     messages: chatItemsToOpenAiMessages([
-    //       {
-    //         id: new Date().toISOString(),
-    //         role: "system",
-    //         content: filledPrompt,
-    //       },
-    //     ]),
-    //   })
-    //   .then((res) => {
-    //     testData.testQuestionsWithAnswers = JSON.parse((res.data.data.choices[0].message.content));
-    //   });
-    console.log(JSON.parse(mockResponse.data.choices[0].message.content));
-    setTestQuestionsWithAnswers(JSON.parse(mockResponse.data.choices[0].message.content).testQuestionsWithAnswers);
+    return axios
+      .post<{ data: OpenAiChatCompletionsResponse }>("/api/chat", {
+        messages: chatItemsToOpenAiMessages([
+          {
+            id: new Date().toISOString(),
+            role: "system",
+            content: englishTestPrompt({ questions, sourceMaterial, studentAnswers, correctAnswers }),
+          },
+        ]),
+      })
+      .then((res) => {
+        setTestQuestionsWithAnswers(JSON.parse(res.data.data.choices[0].message.content).testQuestionsWithAnswers);
+      });
   };
-
-  // const questionsRef = useRef<HTMLTextAreaElement>(null);
-  // const sourceMaterialRef = useRef<HTMLTextAreaElement>(null);
-  // const studentAnswersRef = useRef<HTMLTextAreaElement>(null);
-  // const correctAnswersRef = useRef<HTMLTextAreaElement>(null);
-  //
-  // const [questions, setQuestions] = useLocalStorage("questions", props.initialValue);
-  // const [sourceMaterial, setSourceMaterial] = useLocalStorage("sourceMaterial", props.initialValue);
-  // const [studentAnswers, setStudentAnswers] = useLocalStorage("studentAnswers", props.initialValue);
-  // const [correctAnswers, setCorrectAnswers] = useLocalStorage("correctAnswers", props.initialValue);
 
   const [testQuestionsWithAnswers, setTestQuestionsWithAnswers] = useState([]);
 
   return (
     <div className={styles.pager}>
       <div className={styles.testPage}>
-        {/*<div>*/}
-        {/*  questions: <TextField inputRef={questionsRef} label="Outlined" variant="outlined" fullWidth multiline />*/}
-        {/*</div>*/}
-        {/*<div>*/}
-        {/*  sourceMaterial:{" "}*/}
-        {/*  <TextField inputRef={sourceMaterialRef} label="Outlined" variant="outlined" fullWidth multiline />*/}
-        {/*</div>*/}
-        {/*<div>*/}
-        {/*  studentAnswers:{" "}*/}
-        {/*  <TextField inputRef={studentAnswersRef} label="Outlined" variant="outlined" fullWidth multiline />*/}
-        {/*</div>*/}
-        {/*<div>*/}
-        {/*  correctAnswers:{" "}*/}
-        {/*  <TextField inputRef={correctAnswersRef} label="Outlined" variant="outlined" fullWidth multiline />*/}
-        {/*</div>*/}
-        <Button onClick={() => postTestResultsAndGetMarked(filledPrompt)}>Submit test</Button>
+        <div>
+          <Typography variant="h5">Source Material:</Typography>
+          <TextField
+            inputRef={sourceMaterialRef}
+            onChange={(e) => setSourceMaterial(e.target.value)}
+            variant="outlined"
+            fullWidth
+            multiline
+          />
+        </div>
+        <div>
+          <Typography variant="h5">Questions:</Typography>
+          <TextField
+            inputRef={questionsRef}
+            onChange={(e) => setQuestions(e.target.value)}
+            variant="outlined"
+            fullWidth
+            multiline
+          />
+        </div>
+        <div>
+          <Typography variant="h5">Correct answers:</Typography>
+          <TextField
+            inputRef={correctAnswersRef}
+            onChange={(e) => setCorrectAnswers(e.target.value)}
+            variant="outlined"
+            fullWidth
+            multiline
+          />
+        </div>
+        <div>
+          <Typography variant="h5">Student answers:</Typography>
+          <TextField
+            inputRef={studentAnswersRef}
+            onChange={(e) => setStudentAnswers(e.target.value)}
+            variant="outlined"
+            fullWidth
+            multiline
+          />
+        </div>
+        <Button onClick={() => postTestResultsAndGetMarked()}>Submit test</Button>
       </div>
       <div className={styles.resultsPage}>
         <div className={styles.studentBlock}>
@@ -97,6 +120,14 @@ export default function Marks() {
               <Typography variant="body1" className={styles.studentAnswer}>
                 {multilinify(item.studentAnswer)}
               </Typography>
+              {!item.notes?.length ? null : (
+                <div className={styles.notes}>
+                  <Typography variant="body1">
+                    <strong>Notes</strong>
+                  </Typography>
+                  <Typography variant="body1">{multilinify(item.notes)}</Typography>
+                </div>
+              )}
             </div>
           ))}
         </div>
